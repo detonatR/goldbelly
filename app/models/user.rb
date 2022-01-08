@@ -7,4 +7,6 @@ class User < ActiveRecord::Base
          :recoverable, :validatable
 
   include DeviseTokenAuth::Concerns::User
+
+  has_many :links, dependent: :destroy
 end
