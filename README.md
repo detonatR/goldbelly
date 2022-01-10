@@ -58,4 +58,4 @@ GET /s/:slug - finds link by slug and redirects to full destination
 
 Slugger service initializes a new link record with either the custom slug or generated slug. From there, record is saved and sent to validation in the controller. Most validations for url and slug are handled by their respective validators. 
 
-RedirectsController handles the redirect, while LikesController handles the usually CRUD. I seperated to separate concerns, and make it cleaner to add more on to the redirect functionality (stat tracking etc)
+RedirectsController handles the redirect, while LikesController handles the usually CRUD. I separated to separate concerns, and make it cleaner to add more on to the redirect functionality (stat tracking etc)
