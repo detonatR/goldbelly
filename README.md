@@ -51,6 +51,8 @@ PATCH /links/:id
 
 DELETE /links/:id
 
+GET /s/:slug - finds link by slug and redirects to full destination
+
 
 # How the app is structured:
 
