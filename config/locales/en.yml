@@ -30,4 +30,10 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  errors:
+    messages:
+      blank_host: "host can not be blank in URLs"
+      blank_schema: "please include http or https"
+      incomplete_domain: "please include a full domain"
+      invalid_url: "is not a valid url"
+      not_parsable: "is not a parsable url"

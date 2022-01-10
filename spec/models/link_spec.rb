@@ -14,7 +14,16 @@ RSpec.describe Link, type: :model do
   describe 'validations' do
     subject(:link) { build(:link) }
 
-    it { is_expected.to validate_uniqueness_of(:url) }
+    it { is_expected.to validate_presence_of(:url) }
+    it { is_expected.to validate_presence_of(:slug) }
+
+    it 'uses the UrlValidator' do
+      expect(described_class.validators.map(&:class)).to include(UrlValidator)
+    end
+
+    it 'uses the SlugValidator' do
+      expect(described_class.validators.map(&:class)).to include(SlugValidator)
+    end
   end
 
   describe 'scopes' do
@@ -32,41 +41,6 @@ RSpec.describe Link, type: :model do
     context 'when expired' do
       it 'returns links that have expires_at set to <= now' do
         expect(described_class.expired).to eq([link_3, link_4])
-      end
-    end
-  end
-
-  describe '#slug' do
-    subject(:link) { create(:link, slug: slug) }
-
-    context 'when there is a slug set' do
-      let(:slug) { 'custom' }
-
-      it 'returns the existing slug' do
-        expect(subject.slug).to eq slug
-      end
-    end
-
-    context 'when there is NO slug set' do
-      let(:slug) { nil }
-      let(:uuid) { 'abc123' }
-
-      before(:each) do
-        allow(SecureRandom).to receive(:uuid).and_return(uuid, SecureRandom.uuid[0..5])
-      end
-
-      context 'when there is an existing record' do
-        let!(:record) { create(:link, slug: uuid) }
-
-        it 'generates a new uuid' do
-          expect(subject.slug).not_to eq uuid
-        end
-      end
-
-      context 'when there is NO existing record' do
-        it 'returns the first uuid' do
-          expect(subject.slug).to eq uuid
-        end
       end
     end
   end
